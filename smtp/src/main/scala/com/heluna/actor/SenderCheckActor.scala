@@ -38,20 +38,7 @@ class SenderCheckActor extends Actor with Logging {
 									// Senderbase check
 									SenderbaseFilter.check(inet) match {
 										case Reject(reason) => sender ! Reject(reason)
-										case _ => {
-											// Greylist check
-											GreylistFilter.check(inet, helo) match {
-												case Greylist(reason) => {
-													// Schedule greylist clearing
-													context.system.scheduler.scheduleOnce(
-														new FiniteDuration(MailDropConfig.getSeconds("maildrop.ip.greylist.time").getOrElse(300).toLong, duration.SECONDS))({
-														GreylistFilter.addToGreyList(inet, helo)
-													})
-													sender ! Greylist(reason)
-												}
-												case _ => sender ! Continue()
-											}
-										}
+										case _ => sender ! Continue()
 									}
 								}
 							}
