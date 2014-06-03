@@ -36,7 +36,7 @@
               @for((message, index) <- inbox.zipWithIndex) {
                 <tr data-id='@message.get("id").getOrElse("")'>
                   <td class=sender>@message.get("sender").getOrElse("(no sender)")</td>
-                  <td class=subject><a href="@routes.Application.message(recipient, message.get("id").getOrElse(""))">@message.get("subject").getOrElse("(no subject)")</a></td>
+                  <td class=subject><a href="@routes.Application.messageBody(recipient, message.get("id").getOrElse(""))">@message.get("subject").getOrElse("(no subject)")</a></td>
                   <td class=date>@message.get("date").getOrElse("(no date)")</td>
                 </tr>
               }

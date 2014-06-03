@@ -92,14 +92,6 @@ class Inbox
     if M.id("global-zeroclipboard-flash-bridge") is null
       for c in M.cn("clipboard-controls")
         c.style.display = 'none'
-    tbl = M.id "inboxtbl"
-    if tbl isnt null
-      rows = tbl.querySelectorAll ".subject"
-      for row in rows
-        link = row.getElementsByTagName("a")
-        if link isnt null
-          link[0].onclick = ->
-            clickMessage this
   reloadInbox: () =>
     tbl = M.id "inboxtbl"
     btn = M.id "reload-icon"
